@@ -4,6 +4,7 @@ import {
   ActionButtonsGrid,
   BalanceCard,
   BatchSendModal,
+  ChatModal,
   LoginView,
   ReceiveModal,
   RecentActivity,
@@ -26,6 +27,7 @@ export default function Home() {
   const [showSend, setShowSend] = useState(false);
   const [showReceive, setShowReceive] = useState(false);
   const [showBatchSend, setShowBatchSend] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
   const [memo, setMemo] = useState("");
@@ -97,6 +99,7 @@ export default function Home() {
                   onSendClick={() => setShowSend(true)}
                   onReceiveClick={() => setShowReceive(true)}
                   onBatchClick={() => setShowBatchSend(true)}
+                  onChatClick={() => setShowChat(true)}
                 />
                 <RecentActivity
                   transactions={transactions}
@@ -139,6 +142,7 @@ export default function Home() {
         isOpen={showBatchSend}
         onClose={() => setShowBatchSend(false)}
       />
+      <ChatModal isOpen={showChat} onClose={() => setShowChat(false)} />
     </>
   );
 }

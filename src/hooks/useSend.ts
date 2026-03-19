@@ -9,6 +9,8 @@ import {
   defineChain,
   http,
   parseUnits,
+  isAddress,
+  padHex,
   stringToHex,
   walletActions,
   type Address,
@@ -73,7 +75,11 @@ export function useSend() {
       const { receipt } = await client.token.transferSync({
         to: recipient,
         amount: parseUnits(amount, metadata.decimals),
-        memo: stringToHex(memo || to),
+        memo: memo
+          ? stringToHex(memo, { size: 32 })
+          : isAddress(to)
+            ? padHex(to, { size: 32 })
+            : stringToHex(to, { size: 32 }),
         token: alphaUsd,
       });
 
